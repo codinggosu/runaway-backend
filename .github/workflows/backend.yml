@@ -8,8 +8,6 @@ on:
     branches: [ master ]
 
 defaults:
-  run:
-    working-directory: backend
 jobs:
   test_pull_request:
     runs-on: ubuntu-latest
