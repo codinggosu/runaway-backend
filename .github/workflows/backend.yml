@@ -6,10 +6,13 @@ name: backend
 on:
   pull_request:
     branches: [ master ]
+  push:
+    branches: [ master ]
+
 
 defaults:
 jobs:
-  test_pull_request:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
