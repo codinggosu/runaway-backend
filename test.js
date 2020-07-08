@@ -55,7 +55,7 @@ describe("/POST Chat Transcript", () => {
         };
 
         chai.request(server)
-            .post("/api/volunteer/chat/post")
+            .post("/api/volunteer/chat")
             .send(chat)
             .end((err, res) => {
                 if (err) done(err);
@@ -77,13 +77,38 @@ describe("/POST Chat Transcript", () => {
         };
 
         chai.request(server)
-            .post("/api/volunteer/chat/post")
+            .post("/api/volunteer/chat")
             .send(chat)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a("object");
                 res.body.should.have.a.property("errors");
                 res.body.should.have.a.property("message");
+                done();
+            });
+    });
+});
+
+describe("/POST Event Details", () => {
+    it("should successfully save event to database", (done) => {
+        const event = {
+            organizer: "Cedric", 
+            title: "Dope Event",
+            content: "Will be a really dope event",
+            location: {
+                type: "Point",
+                coordinates: [-122.8, 47.0]
+            }
+        };
+
+        chai.request(server)   
+            .post("/api/volunteer/event")
+            .send(event)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a("object");
+                res.body.should.have.property("success");
+                res.body.should.have.property("eventDetails");
                 done();
             });
     });
