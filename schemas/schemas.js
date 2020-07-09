@@ -82,15 +82,8 @@ const Schema = mongoose.Schema;
 module.exports = {
 
     chatSchema: new Schema({
-        messages: { 
-            type: [ 
-                { 
-                    sender: { type: String, required: true },
-                    message: { type: String, required: true } 
-                } 
-            ],
-            required: true 
-        }
+        date:Date,
+        chatData: Object
     }),
 
     userSchema: new Schema({
