@@ -1,4 +1,6 @@
 let io = require("socket.io");
+const chatModel = require("../../models/chatModel.js");
+
 
 module.exports = function (app, mongoose, server) {
     io = io(server);
@@ -45,4 +47,17 @@ module.exports = function (app, mongoose, server) {
             socket.disconnect();
         });
     });
+
+    app.post("/api/volunteer/chat", function(req, res) {
+        const chatTranscript = req.body.chatData;
+        chatModel.create({date:new Date(),chatData:chatTranscript}, function(err, chat) {
+            if(err) {
+                res.json(err);
+            } else {
+                console.log("chat Saved")
+                res.json({ success: "Chat saved successfully", chat });
+            }
+        });
+    });
+
 }
