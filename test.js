@@ -44,51 +44,6 @@ describe("/GET Blog Post by Url", () => {
     });
 });
 
-describe("/POST Chat Transcript", () => {
-    it("should successfully save chat to database", (done) => {
-        const chat = { 
-            messages:
-                [
-                    { sender: "Cedric", message: "Hi" },
-                    { sender: "Bob", message: "Hey" }
-                ]
-        };
-
-        chai.request(server)
-            .post("/api/volunteer/chat")
-            .send(chat)
-            .end((err, res) => {
-                if (err) done(err);
-                // console.log(res);
-                res.should.have.status(200);
-                res.body.should.be.a("object");
-                res.body.should.have.property("success");
-                res.body.should.have.property("chat");
-                done();
-            });
-    });
-
-    it("should not save chat to database without message", (done) => {
-        const chat = { 
-            messages:
-                [
-                    { sender: "Cedric" }
-                ]
-        };
-
-        chai.request(server)
-            .post("/api/volunteer/chat")
-            .send(chat)
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a("object");
-                res.body.should.have.a.property("errors");
-                res.body.should.have.a.property("message");
-                done();
-            });
-    });
-});
-
 describe("/POST Event Details", () => {
     it("should successfully save event to database", (done) => {
         const event = {

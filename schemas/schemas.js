@@ -26,7 +26,7 @@ module.exports = {
     blogSchema: new Schema({
         user: { type: Schema.Types.ObjectId, ref: "User", required: false },
         title: { type: String, required: true }, 
-        date: { type: String, default: new Date().toJSON() }, 
+        date: { type: Date, default: new Date() }, 
         content: { type: String, required: true },
         likes: { type: Number, required: false, default: 0 },
         url: { type: String, required: true, unique: true },
@@ -36,7 +36,7 @@ module.exports = {
     eventSchema: new Schema({
         organizer: { type: String, required: true },
         title: { type: String, required: true },
-        date: { type: String, default: new Date().toJSON() },
+        date: { type: Date, default: new Date() },
         content: { type: String, required: true },
         location: { 
             type: {
@@ -95,6 +95,7 @@ module.exports = {
  *                      type: string
  *                  date: 
  *                      type: string
+ *                      format: date
  *                  content: 
  *                      type: string 
  *                  likes: 
@@ -116,6 +117,7 @@ module.exports = {
  *                      type: string
  *                  date: 
  *                      type: string
+ *                      format: date
  *                  content: 
  *                      type: string
  *                  location: 
