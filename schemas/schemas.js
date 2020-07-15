@@ -55,6 +55,31 @@ module.exports = {
         title: { type: String, required: true },
         url: { type: String, required: false },
         categories: [ { type: String, required: false } ]
+    }),
+
+    surveySchema: new Schema({
+        user: { type: Schema.Types.ObjectId, ref: "User", required: false, default: null },
+        volunteer: { type: String, ref: "volunteer", required: true },
+        preChat: {
+            type: new Schema({
+                feelings: [String],
+                purposes: [String],
+                suicidal: Boolean,
+                disclaimer: { type: Boolean, required: true }
+            }),
+            required: true
+        },
+        postChat: {
+            type: new Schema({
+                experience: Number,
+                age: String,
+                gender: String,
+                race: String,
+                saveChat: { type: Boolean, required: true }
+            }),
+            required: false,
+            default: {}
+        }
     })
 }
 
@@ -149,5 +174,50 @@ module.exports = {
  *                      items:
  *                          type: string
  *              required: [title]    
+ * 
+ *          Survey:
+ *              type: object
+ *              properties:
+ *                  user:
+ *                      type: object
+ *                  volunteer:
+ *                      type: object
+ *                  preChat:
+ *                      type: object
+ *                      properties: 
+ *                          feelings:
+ *                              type: array
+ *                              items: 
+ *                                  type: string
+ *                          purposes:
+ *                              type: array
+ *                              items:
+ *                                  type: string
+ *                          suicidal: 
+ *                              type: boolean
+ *                          disclaimer:
+ *                              type: boolean
+ *                      required: [disclaimer]
+ *                  postChat:
+ *                      $ref: "#/components/schemas/postChat"
+ *              required: [volunteer, preChat]
+ * 
+ *          postChat:
+ *              type: object
+ *              properties:
+ *                  experience:
+ *                      type: number
+ *                      minimum: 0
+ *                      maximum: 5
+ *                  age:
+ *                      type: string
+ *                  gender:
+ *                      type: string
+ *                  race:
+ *                      type: string
+ *                  saveChat:
+ *                      type: boolean
+ *              required: [saveChat]
+ *                          
  */
 
