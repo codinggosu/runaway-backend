@@ -75,7 +75,7 @@ module.exports = {
                 age: String,
                 gender: String,
                 race: String,
-                saveChat: { type: Boolean, required: true }
+                saveChat: Boolean
             }),
             required: false,
             default: {}
@@ -217,7 +217,6 @@ module.exports = {
  *                      type: string
  *                  saveChat:
  *                      type: boolean
- *              required: [saveChat]
  *                          
  */
 
