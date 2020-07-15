@@ -28,10 +28,10 @@ module.exports = function (app, mongoose) {
                                 done(err);
                             } else {
                                 VolunteerModel.create({ //CREATE
-                                    firstName: req.body.firstName,
-                                    lastName: req.body.lastName,
+                                    username: req.body.username,
                                     email: email,
-                                    password: hashed
+                                    password: hashed,
+                                    access: req.body.access
                                 }).then(user => {
                                     console.log("Created User");
                                     return (done(null, user));
