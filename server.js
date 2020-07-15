@@ -9,6 +9,10 @@ const PORT = process.env.PORT || 7000
 
 //Routes
 const blogRoute = require("./route/blog.js");
+const chatRoute = require("./route/chat/chat.js");
+const chatDataHandler = require("./route/chat.js"); //to be merged into chatRoute soon
+const eventRoute = require("./route/event.js");
+const resourceRoute = require("./route/resource.js");
 
 //connect to the database // for now, the password will be in the file
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://runaway-database:2gn5YAq0BRwLc7tF@runaway-mrvci.mongodb.net/runaway?retryWrites=true&w=majority", {useNewUrlParser: true});
@@ -37,7 +41,10 @@ app.get("/", function(req,res){
 //Route function called
 blogRoute(app,mongoose);
 auth(app,mongoose);
-
+chatRoute(app,mongoose,server);
+chatDataHandler(app,mongoose);
+eventRoute(app, mongoose);
+resourceRoute(app, mongoose);
 
 
 
