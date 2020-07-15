@@ -75,11 +75,7 @@ module.exports = {
                 age: String,
                 gender: String,
                 race: String,
-<<<<<<< HEAD
                 saveChat: Boolean
-=======
-                saveChat: { type: Boolean, required: true }
->>>>>>> f19ab9fc530c9d4882ca4635005293c129192014
             }),
             required: false,
             default: {}
@@ -221,10 +217,6 @@ module.exports = {
  *                      type: string
  *                  saveChat:
  *                      type: boolean
-<<<<<<< HEAD
-=======
- *              required: [saveChat]
->>>>>>> f19ab9fc530c9d4882ca4635005293c129192014
  *                          
  */
 
