@@ -9,6 +9,7 @@ module.exports = function (app, mongoose) {
                 console.log(err);
             } else {
                 if (user === false) {
+                    console.log("Failed :(");
                     res.status(422).send({
                         auth: false,
                         message: "Username or password is wrong"
@@ -17,6 +18,7 @@ module.exports = function (app, mongoose) {
                     req.logIn(user, function (err) {
                         const token = jwt.sign({ email: user.email }, "temp");//change this later
                         console.log("LOGGED IN!");
+                        console.log(user.access);
                         res.status(200).send({
                             auth: true,
                             token: token,

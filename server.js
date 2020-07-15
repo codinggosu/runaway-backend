@@ -4,6 +4,7 @@ const http = require('http');
 const express = require("express");
 const mongoose = require("mongoose");
 const auth = require("./route/auth/auth");
+const passport = require("passport");
 
 const app = express();
 const PORT = process.env.PORT || 7000;
@@ -49,6 +50,7 @@ const swaggerSpec = swaggerJSDoc(options);
 app.use(Cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 
