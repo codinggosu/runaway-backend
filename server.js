@@ -49,6 +49,7 @@ const swaggerSpec = swaggerJSDoc(options);
 app.use(Cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 
