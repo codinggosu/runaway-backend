@@ -20,7 +20,7 @@ const options = {
         info: {
             title: "Runaway API", // Title (required)
             version: "1.0.0", // Version (required)
-            servers: ["http://localhost:7000"]
+            servers: ["http://localhost:7000", "https://runaway-practicum.herokuapp.com"]
         },
     },
         // Path to the API docs
@@ -29,8 +29,7 @@ const options = {
 
 //Routes
 const blogRoute = require("./route/blog.js");
-const chatRoute = require("./route/chat/chat.js");
-const chatDataHandler = require("./route/chat.js"); //to be merged into chatRoute soon
+const chatRoute = require("./route/chat.js");
 const eventRoute = require("./route/event.js");
 const resourceRoute = require("./route/resource.js");
 const surveyRoute = require("./route/survey.js")
@@ -65,7 +64,6 @@ app.get("/", function(req,res){
 blogRoute(app,mongoose);
 auth(app,mongoose);
 chatRoute(app,mongoose,server);
-chatDataHandler(app,mongoose);
 eventRoute(app, mongoose);
 resourceRoute(app, mongoose);
 surveyRoute(app, mongoose);

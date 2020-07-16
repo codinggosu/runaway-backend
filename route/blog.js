@@ -53,6 +53,13 @@ module.exports = function(app,mongoose){
      *      responses:
      *          "200": 
      *              description: List of blogs
+     *              content: 
+     *                  application/json:
+     *                      schema:
+     *                          type: array
+     *                          items:
+     *                              $ref: "#/components/schemas/Blog"
+     * 
      */
     app.get("/api/volunteer/blog/get/:page", function(req, res) {
         const resPerPage = 20;  // results per page

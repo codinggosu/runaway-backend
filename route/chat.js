@@ -1,6 +1,51 @@
+let io = require("socket.io");
 const chatModel = require("../models/chatModel.js");
 
-module.exports = function(app, mongoose) {
+module.exports = function (app, mongoose, server) {
+    io = io(server);
+    console.log(server);
+
+    let queue = [];
+
+    //upon Connection, create room and join 
+    io.on("connection", (socket) => {
+        let room;
+        socket.on("joinRoom", function (roomNum) {
+            room = roomNum;
+            ROOOOM = roomNum;
+            socket.join(room);
+            console.log('user joined room #' + room);
+
+            //When on "pushQuery", push the room Number to the queue. 
+            socket.on("pushQueue", function (roomNum) {
+                queue.push(roomNum);
+                console.log(queue);
+                //Send all volunteers the updated Queue
+                io.emit("updateQueue", queue);
+            });
+        })
+
+        socket.on("sendMessage", function (message) {
+            socket.broadcast.to(room).emit("updateMessage", message);
+            console.log(`Sent to Room #${room} the message, ${message}`)
+        })
+
+        socket.on("observeQueue", function (roomNum) {
+            io.emit("updateQueue", queue);
+        })
+
+
+        //Upon disconnection
+        socket.on("disconnect", () => {
+            if (room !== undefined) {
+                let index = queue.indexOf(room);
+                queue.splice(index, 1);
+                console.log("room is taken out of the queue");
+                io.emit("updateQueue", queue);
+            }
+            socket.disconnect();
+        });
+    });
 
     /**
      * @swagger 
@@ -14,20 +59,25 @@ module.exports = function(app, mongoose) {
      *          content:
      *              application/json:
      *                  schema:
-     *                      $ref: "#/components/schemas/Chat"
+     *                      type: object
+     *                      properties:
+     *                          chatData:
+     *                              type: object
      * 
      *      responses:
      *          "200": 
      *              description: Chat successfully saved to database 
+     *          "422":
+     *              description: Unable to save chat to database
      */ 
     app.post("/api/volunteer/chat", function(req, res) {
-        const chatTranscript = req.body;
-
-        chatModel.create(chatTranscript, function(err, chat) {
+        const chatTranscript = req.body.chatData;
+        chatModel.create({ date: new Date(), chatData: chatTranscript }, function(err, chat) {
             if(err) {
-                res.json(err);
+                res.status(422).json(err);
             } else {
-                res.json({ success: "Chat saved successfully", chat });
+                console.log("chat Saved")
+                res.status(200).json({ success: "Chat saved successfully", chat });
             }
         });
     });
@@ -56,5 +106,4 @@ module.exports = function(app, mongoose) {
             res.json(chats);
         });
     });
-
 }
