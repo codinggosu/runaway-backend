@@ -4,15 +4,8 @@ const Schema = mongoose.Schema;
 module.exports = {
 
     chatSchema: new Schema({
-        messages: { 
-            type: [ 
-                { 
-                    sender: { type: String, required: true },
-                    message: { type: String, required: true } 
-                } 
-            ],
-            required: true 
-        }
+        date: { type: Date, required: true, default: Date.now },
+        chatData: { type: Schema.Types.Mixed, required: true }
     }),
 
     userSchema: new Schema({
@@ -26,7 +19,7 @@ module.exports = {
     blogSchema: new Schema({
         user: { type: Schema.Types.ObjectId, ref: "User", required: false },
         title: { type: String, required: true }, 
-        date: { type: Date, default: new Date() }, 
+        date: { type: Date, default: Date.now }, 
         content: { type: String, required: true },
         readTime: { type: Number, required: true },
         likes: { type: Number, required: false, default: 0 },
@@ -37,7 +30,7 @@ module.exports = {
     eventSchema: new Schema({
         organizer: { type: String, required: true },
         title: { type: String, required: true },
-        date: { type: Date, default: new Date() },
+        date: { type: Date, required: true },
         content: { type: String, required: true },
         location: { 
             type: {
@@ -97,20 +90,12 @@ module.exports = {
  *          Chat:
  *              type: object
  *              properties:
- *                  messages:
- *                      type: array
- *                      items: 
- *                          type: object
- *                          properties: 
- *                              sender: 
- *                                  type: string
- *                              message:
- *                                  type: string
- *                          required: 
- *                              - sender
- *                              - message
- *              required:
- *                  - messages 
+ *                  date:
+ *                      type: string
+ *                      format: date
+ *                  chatData:
+ *                      type: object
+ *              required: [date, chatData]
  * 
  *          Blog:
  *              type: object
