@@ -28,6 +28,7 @@ module.exports = {
         title: { type: String, required: true }, 
         date: { type: Date, default: new Date() }, 
         content: { type: String, required: true },
+        readTime: { type: Number, required: true },
         likes: { type: Number, required: false, default: 0 },
         url: { type: String, required: true, unique: true },
         comments: [ { type: String, required: false } ]
