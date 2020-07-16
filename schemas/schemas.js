@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 module.exports = {
 
     chatSchema: new Schema({
-        date: { type: Date, required: true, default: Date.now },
+        date: { type: Date, default: Date.now },
         chatData: { type: Schema.Types.Mixed, required: true }
     }),
 
@@ -95,7 +95,7 @@ module.exports = {
  *                      format: date
  *                  chatData:
  *                      type: object
- *              required: [date, chatData]
+ *              required: [chatData]
  * 
  *          Blog:
  *              type: object
@@ -117,7 +117,7 @@ module.exports = {
  *                      type: array
  *                      items:
  *                          type: string
- *              required: [user, title, date, content, url]
+ *              required: [user, title, content, url]
  * 
  *          Event:
  *              type: object

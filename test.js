@@ -49,6 +49,7 @@ describe("/POST Event Details", () => {
         const event = {
             organizer: "Cedric", 
             title: "Dope Event",
+            date: new Date(),
             content: "Will be a really dope event",
             location: {
                 type: "Point",
