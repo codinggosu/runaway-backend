@@ -49,6 +49,11 @@ module.exports = function(app, mongoose) {
      *              items: 
      *                  type: string
      *          description: Categories to filter the resources by
+     *        - in: query
+     *          name: search
+     *          schema:
+     *              type: string
+     *          description: Term to search through the resource titles by
      * 
      *      responses:
      *          "200": 
@@ -65,15 +70,21 @@ module.exports = function(app, mongoose) {
      */
     app.get("/api/volunteer/resource", function(req, res) {
         const filters = req.query.filter;
+        const search = req.query.search;
 
         let query = resourceModel.find();
 
         if (filters) {
             query.where({ categories: { $in: filters } });
         }
+
+        if (search) {
+            query.where({ title: { $regex: `^${search}`, $options: "i" } });
+        }
         
         query.exec(function(err, resources) {
             if (err) {
+                console.log(err);
                 res.status(500).send(err);
             } else {
                 res.status(200).json(resources);
