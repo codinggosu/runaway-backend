@@ -9,7 +9,7 @@ module.exports = {
     }),
 
     userSchema: new Schema({
-        name: { type: String, required: true },
+        access: { type: String, required: true },
         email: { type: String, required: true },
         password: { type: String, required: true }
     }),
@@ -17,11 +17,12 @@ module.exports = {
     contentSchema: {},
 
     blogSchema: new Schema({
-        user: { type: Schema.Types.ObjectId, ref: "User", required: false },
+        author: { type: String, required: false },
         title: { type: String, required: true }, 
         date: { type: Date, default: Date.now }, 
         content: { type: String, required: true },
-        readTime: { type: Number, required: true },
+        imageURL: { type: String, required: true },
+        readTime: { type: String, required: true },
         likes: { type: Number, required: false, default: 0 },
         url: { type: String, required: true, unique: true },
         comments: [ { type: String, required: false } ]
@@ -100,7 +101,7 @@ module.exports = {
  *          Blog:
  *              type: object
  *              properties:
- *                  user:
+ *                  author:
  *                      type: string
  *                  title: 
  *                      type: string
@@ -113,11 +114,15 @@ module.exports = {
  *                      type: number
  *                  url: 
  *                      type: string
+ *                  imageUrl:
+ *                      type: string
+ *                  readTime: 
+ *                      type: string
  *                  comments:
  *                      type: array
  *                      items:
  *                          type: string
- *              required: [user, title, content, url]
+ *              required: [author, title, content, url, imageUrl, readTime]
  * 
  *          Event:
  *              type: object

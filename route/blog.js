@@ -6,7 +6,7 @@ module.exports = function(app,mongoose){
     /**
      * @swagger
      * 
-     * /api/volunteer/blog/post:
+     * /api/volunteer/blog:
      *  post: 
      *      summary: Save blog post to database
      *      tags: [Blog]
@@ -20,18 +20,23 @@ module.exports = function(app,mongoose){
      *      responses:
      *          "200":
      *              description: Blog post successfully saved to database
+     *          "422":
+     *              description: Unable to save blog to database
      */
-    app.post("/api/volunteer/blog/post", function(req, res) {
+    app.post("/api/volunteer/blog", function(req, res) {
+        const blogPost = req.body;
+        const date = new Date();
 
-        const title = req.body.title;
-        const date = (new Date()).toJSON();
-
-        blogModel.create({
-            user: "default",
-            title: req.body.blogData.title,
-            date: new Date(),
-            content: req.body.blogData.content,
-            url: `${date}/${title}`
+        blogPost.date = date;
+        blogPost.url = `${date.toJSON()}/${blogPost.title}`;
+        console.log(blogPost);
+        blogModel.create(blogPost, function(err, blog) {
+            if (err) {
+                console.log(err);
+                res.status(422).json(err);
+            } else {
+                res.status(200).json({ success: "Blog successfully saved to database", blog: blog });
+            }
         });    
 
     })
