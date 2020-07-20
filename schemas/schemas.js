@@ -101,7 +101,7 @@ module.exports = {
  *          Blog:
  *              type: object
  *              properties:
- *                  user:
+ *                  author:
  *                      type: string
  *                  title: 
  *                      type: string
@@ -114,11 +114,15 @@ module.exports = {
  *                      type: number
  *                  url: 
  *                      type: string
+ *                  imageUrl:
+ *                      type: string
+ *                  readTime: 
+ *                      type: string
  *                  comments:
  *                      type: array
  *                      items:
  *                          type: string
- *              required: [user, title, content, url]
+ *              required: [author, title, content, url, imageUrl, readTime]
  * 
  *          Event:
  *              type: object
