@@ -19,10 +19,10 @@ module.exports = function (app, mongoose) {
                         const token = jwt.sign({ email: user.email }, "temp");//change this later
                         console.log("LOGGED IN!");
                         console.log(user.access);
-                        res.status(200).send({
+                        res.status(200).json({
                             auth: true,
                             token: token,
-                            message: "good"
+                            access: user.access
                         })
                     })
                 }
