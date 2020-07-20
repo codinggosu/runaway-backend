@@ -25,12 +25,14 @@ module.exports = function(app,mongoose){
 
         const title = req.body.title;
         const date = (new Date()).toJSON();
-
+        console.log(req.body);
         blogModel.create({
-            user: "default",
-            title: req.body.blogData.title,
+            author: req.body.author,
+            title: req.body.title,
             date: new Date(),
-            content: req.body.blogData.content,
+            content: req.body.content,
+            readTime: req.body.readTime,
+            imageURL: req.body.imageURL,
             url: `${date}/${title}`
         });    
 

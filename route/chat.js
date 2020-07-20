@@ -71,6 +71,8 @@ module.exports = function (app, mongoose, server) {
      *              description: Unable to save chat to database
      */ 
     app.post("/api/volunteer/chat", function(req, res) {
+        console.log(req.body.chatData);
+        console.log("called!");
         const chatTranscript = req.body.chatData;
         chatModel.create({ date: new Date(), chatData: chatTranscript }, function(err, chat) {
             if(err) {

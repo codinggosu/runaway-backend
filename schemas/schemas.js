@@ -17,11 +17,12 @@ module.exports = {
     contentSchema: {},
 
     blogSchema: new Schema({
-        user: { type: Schema.Types.ObjectId, ref: "User", required: false },
+        author: { type: String, required: false },
         title: { type: String, required: true }, 
         date: { type: Date, default: Date.now }, 
         content: { type: String, required: true },
-        readTime: { type: Number, required: true },
+        imageURL: { type: String, required: true },
+        readTime: { type: String, required: true },
         likes: { type: Number, required: false, default: 0 },
         url: { type: String, required: true, unique: true },
         comments: [ { type: String, required: false } ]
