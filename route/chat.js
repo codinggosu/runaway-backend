@@ -31,6 +31,7 @@ module.exports = function (app, mongoose, server) {
         })
 
         socket.on("observeQueue", function (roomNum) {
+            socket.broadcast.to(room).emit("volunteerJoined");
             io.emit("updateQueue", queue);
         })
 
