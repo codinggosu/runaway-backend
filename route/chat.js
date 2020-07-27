@@ -30,8 +30,12 @@ module.exports = function (app, mongoose, server) {
             console.log(`Sent to Room #${room} the message, ${message}`)
         })
 
+        socket.on("volunteerJoined", function (dummy){
+            socket.broadcast.to(room).emit("volunteerJoined","dummy");
+            console.log("volunteer joined in the server side");
+        })
+
         socket.on("observeQueue", function (roomNum) {
-            io.emit("volunteerJoined","dummy");
             io.emit("updateQueue", queue);
         })
 
