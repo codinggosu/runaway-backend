@@ -30,7 +30,7 @@ module.exports = function (app, mongoose) {
         console.log(err);
       } else {
         res.status(201).json({
-          success: "Resource successfully saved to database",
+          success: "Survey successfully saved to database",
           id: survey._id,
         });
         console.log(survey);
