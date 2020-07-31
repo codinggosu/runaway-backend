@@ -52,6 +52,13 @@ module.exports = {
         categories: [ { type: String, required: false } ]
     }),
 
+    announcementSchema: new Schema({
+        image: String,
+        date: Date,
+        name: String,
+        content: String
+    }),
+
     surveySchema: new Schema({
         user: { type: Schema.Types.ObjectId, ref: "User", required: false, default: null },
         volunteer: { type: String, ref: "volunteer", required: true },
