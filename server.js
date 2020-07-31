@@ -37,6 +37,7 @@ const eventRoute = require("./route/event.js");
 const resourceRoute = require("./route/resource.js");
 const surveyRoute = require("./route/survey.js");
 const volunteerRoute = require("./route/volunteer.js");
+const announcementRoute = require("./route/announcement");
 
 //connect to the database // for now, the password will be in the file
 mongoose.connect(
@@ -73,6 +74,8 @@ eventRoute(app, mongoose);
 resourceRoute(app, mongoose);
 surveyRoute(app, mongoose);
 volunteerRoute(app, mongoose);
+announcementRoute(app,mongoose);
+
 
 app.set("json spaces", 2);
 
