@@ -18,6 +18,7 @@ const mailOptions = {
 };
 
 transporter.sendMail(mailOptions, function(error, info){
+  console.log(process.env.EMAIL_PASSWORD)
   if (error) {
 	console.log(error);
   } else {
