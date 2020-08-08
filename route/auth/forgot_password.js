@@ -17,7 +17,7 @@ module.exports = function (app, mongoose) {
             Crypto.randomBytes(20, function(err, buf) {
                 let token = buf.toString("hex");
                 console.log(token, "is token");
-                reset_link = process.env.BASE_URL + '/reset' + token;
+                reset_link = process.env.HOST + ":" + process.env.PORT + '/reset/' + token; // need to change with frontend link
                 user.resetPasswordToken = token;
                 user.resetPasswordExpiration = Date.now() + 3600000;
                 user.save(function(err) {
@@ -33,7 +33,6 @@ module.exports = function (app, mongoose) {
             })
         }
     })
-    console.log(email, "fodrgot pasword");
-    res.status(200).send(email + "asdf");
+    console.log(email, "forgot pasword link sent to ", email);
     });
 }
