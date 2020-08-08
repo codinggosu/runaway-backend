@@ -11,7 +11,9 @@ module.exports = {
     userSchema: new Schema({
         access: { type: String, required: true },
         email: { type: String, required: true },
-        password: { type: String, required: true }
+        password: { type: String, required: true },
+        passwordResetToken: {type: String, required: false },
+        passwordResetTokenExpiration: {type: Date, required: false}
     }),
 
     contentSchema: {},
