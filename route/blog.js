@@ -68,8 +68,8 @@ module.exports = function(app,mongoose){
      */
     app.get("/api/volunteer/blog/get/:page", function(req, res) {
         const resPerPage = 20;  // results per page
-        const page = req.params.page || 1; // Page
-        
+        const page = parseInt(req.params.page); // Page
+
         blogModel.find(null, null, { skip: (resPerPage * (page - 1)), limit: resPerPage }, function(err, blogs) {
             if (err) throw new Error(err);
             const count = blogs.length;
@@ -78,7 +78,13 @@ module.exports = function(app,mongoose){
             if (count == 0) {
                 res.send("No more blog posts");
             } else {
-                res.json(blogs);
+                blogModel.estimatedDocumentCount(function(err, totalBlogs) {
+                    if (err) {
+                        res.status(500).json(err);
+                    } else {
+                        res.status(200).json({ page, totalBlogs, blogs });
+                    }
+                });     
             }
         });
 
