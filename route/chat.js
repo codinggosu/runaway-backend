@@ -41,8 +41,9 @@ module.exports = function (app, mongoose, server) {
 
 
         //Upon disconnection
-        socket.on("disconnect", () => {
-            if (room !== undefined) {
+        socket.on("disconnectUser", (user) => {
+            console.log(user+"hey!");
+            if(user === "user"){
                 let index = queue.indexOf(room);
                 queue.splice(index, 1);
                 console.log("room is taken out of the queue");
