@@ -24,7 +24,8 @@ describe("/GET Blog Posts 20 at a time", () => {
       .get("/api/volunteer/blog/get/1")
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.be.a("array");
+        res.body.should.be.a("object");
+        res.body.should.have.property("blogs");
         done();
       });
   });
