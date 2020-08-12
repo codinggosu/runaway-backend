@@ -22,6 +22,7 @@ module.exports = function (app, mongoose) {
                         res.status(200).json({
                             auth: true,
                             token: token,
+                            user: user,
                             access: user.access
                         })
                     })
