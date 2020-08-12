@@ -13,7 +13,6 @@ module.exports = function (app, mongoose) {
         } else {
             Crypto.randomBytes(20, function(err, buf) {
                 let token = buf.toString("hex");
-                console.log(token, "is token");
                 reset_link = process.env.HOST + ":" + process.env.PORT + '/reset/' + token; // need to change with frontend link
                 user.resetPasswordToken = token;
                 user.resetPasswordExpiration = Date.now() + 3600000;
@@ -29,7 +28,6 @@ module.exports = function (app, mongoose) {
                 });
             })
         }
-        console.log("user", user)
     })
     console.log(email, "forgot pasword link sent to ", email);
     });
