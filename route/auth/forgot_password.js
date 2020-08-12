@@ -1,6 +1,3 @@
-const crypto = require("crypto")
-const passport = require("passport");
-// const jwt = require("jsonwebtoken");
 const Crypto = require("crypto");
 const mail_sender = require('./email.js')
 
@@ -26,12 +23,13 @@ module.exports = function (app, mongoose) {
                     }
                     else {
                         mail_sender(email, 'forgot your password?', reset_link);
-                        console.log("mail succcessfully sent");
+                        console.log("mail succcessfully sent", user);
                         res.status(200).send('password reset link sent!');
                     }
                 });
             })
         }
+        console.log("user", user)
     })
     console.log(email, "forgot pasword link sent to ", email);
     });

@@ -12,8 +12,8 @@ module.exports = {
         access: { type: String, required: true },
         email: { type: String, required: true },
         password: { type: String, required: true },
-        passwordResetToken: {type: String, required: false },
-        passwordResetTokenExpiration: {type: Date, required: false}
+        resetPasswordToken: {type: String, required: false },
+        resetPasswordExpiration: {type: Date, required: false}
     }),
 
     contentSchema: {},
