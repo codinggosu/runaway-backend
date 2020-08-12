@@ -87,7 +87,7 @@ module.exports = function (app, mongoose) {
           } else {
             res
               .status(200)
-              .json({ success: "Survey updated successfully", survey: survey });
+              .json({ success: "Survey updated successfully", survey });
             console.log(survey);
           }
         });
