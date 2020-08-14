@@ -47,6 +47,7 @@ module.exports = function (app, mongoose, server) {
                 let index = queue.indexOf(room);
                 queue.splice(index, 1);
                 console.log("room is taken out of the queue");
+                socket.broadcast.to(room).emit("updateMessage","USER HAS EXITED THE CHAT");
                 io.emit("updateQueue", queue);
             }
             socket.disconnect();
