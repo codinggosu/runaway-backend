@@ -23,7 +23,7 @@ module.exports = function(app,mongoose){
      *          "422":
      *              description: Unable to save blog to database
      */
-    app.post("/api/volunteer/blog", function(req, res) {
+    app.post("/api/volunteer/blog/post", function(req, res) {
         const blogPost = req.body;
         const date = new Date();
 
