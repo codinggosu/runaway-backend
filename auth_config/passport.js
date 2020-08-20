@@ -34,7 +34,7 @@ module.exports = function (app, mongoose) {
                                     access: req.body.access
                                 }).then(user => {
                                     console.log("Created User");
-                                    return (done(null, user));
+                                    return (done(null, user,password));
                                 });
                             }
                         });
