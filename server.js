@@ -1,5 +1,5 @@
 const bodyParser = require("body-parser");
-const Cors = require("cors");
+const cors = require("cors");
 const http = require("http");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -10,9 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 7000;
 const server = http.createServer(app);
 
-// Swagger documentation
-const swaggerJSDoc = require("swagger-jsdoc");
-const swaggerUI = require("swagger-ui-express");
+
 
 const options = {
   definition: {
@@ -30,6 +28,11 @@ const options = {
   apis: ["./route/*.js", "./schemas/schemas.js"],
 };
 
+// Swagger documentation
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpec = swaggerJSDoc(options);
+
 //Routes
 const blogRoute = require("./route/blog.js");
 const chatRoute = require("./route/chat.js");
@@ -38,6 +41,13 @@ const resourceRoute = require("./route/resource.js");
 const surveyRoute = require("./route/survey.js");
 const volunteerRoute = require("./route/volunteer.js");
 const announcementRoute = require("./route/announcement");
+
+//MiddleWare
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 //connect to the database // for now, the password will be in the file
 mongoose.connect(
@@ -53,14 +63,6 @@ db.once("open", () => {
 });
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-const swaggerSpec = swaggerJSDoc(options);
-
-//MiddleWare
-app.use(Cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(passport.initialize());
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.get("/", function (req, res) {
   return res.status(200).send("Hello World");

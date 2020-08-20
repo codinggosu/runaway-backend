@@ -14,7 +14,7 @@ module.exports = function (app, mongoose) {
         console.log(req);
         let data = req.body;
         Announcement.create({
-            image: data.image,
+            image: data.imageURL,
             date: new Date(),
             name: data.name,
             content: data.content,
