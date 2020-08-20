@@ -6,7 +6,7 @@ module.exports = function(destination_email, subject, text){
     service: 'gmail',
     auth: {
       user: 'runawayengineering@gmail.com',
-      pass: process.env.EMAIL_PASSWORD
+      pass: "Practicum20!"//process.env.EMAIL_PASSWORD
     }
   });
   const mailOptions = {
