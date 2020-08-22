@@ -27,4 +27,21 @@ module.exports = function (app, mongoose) {
             }
         });
     });
+
+    app.delete("/api/announcement/:id", function(req, res) {
+        const id = req.params.id;
+
+        Announcement.findByIdAndDelete(id, function(err, announcement) {
+            if (err) {
+                res.status(400).json({ error: "Not a valid id", err });
+            } else if (!announcement) {
+                res.status(404).send(`No announcement found from id: ${id}`);
+            } else {
+                res.status(200).json({
+                    succees: "Announcement successfully deleted from database",
+                    announcement
+                });
+            }
+        });
+    });
 }
